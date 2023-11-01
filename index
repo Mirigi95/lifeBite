@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic-Tac-Toe Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+      margin: 20px auto;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background-color: #eee;
+      cursor: pointer;
+    }
+
+    .cell:hover {
+      background-color: #ddd;
+    }
+  </style>
+  <script>loginWithFacebook()</script>
+</head>
+<body>
+  <h1>Tic-Tac-Toe Game</h1>
+  <div class="board" id="board">
+    <!-- The game board will be created dynamically in JavaScript -->
+  </div>
+
+  <button onclick="loginWithFacebook()">Login with Facebook</button>
+  <button onclick="shareOnFacebook()">Share on Facebook</button>
+
+  <script>
+    // Load the Facebook SDK asynchronously
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '757019068952034',
+        cookie: true,
+        xfbml: true,
+        version: 'v12.0'
+      });
+    };
+
+    function loginWithFacebook() {
+      FB.login(function(response) {
+        if (response.authResponse) {
+          console.log('Logged in with Facebook');
+          // You can now access user data and perform actions as needed
+        } else {
+          console.log('Facebook login canceled or failed');
+        }
+      });
+    }
+
+    function shareOnFacebook() {
+      FB.ui({
+        method: 'share',
+        href: 'https://your-game-website.com', // Replace with your game URL
+      }, function(response) {
+        if (response && !response.error_code) {
+          console.log('Shared on Facebook');
+        } else {
+          console.log('Facebook sharing canceled or failed');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
